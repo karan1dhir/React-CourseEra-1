@@ -4,7 +4,7 @@ class DishDetail extends Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedDish : null
+           
          }     
     }
     renderComments(dish){
@@ -58,6 +58,8 @@ class DishDetail extends Component{
         }  
     }
     render(){
+        console.log('in render of DishDetail')
+        console.log(this.props.dish);
         const dishItem = this.renderDish(this.props.dish);
         const commentItem = this.renderComments(this.props.dish);
         return(
