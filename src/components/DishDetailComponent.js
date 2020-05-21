@@ -1,13 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap'
-class DishDetail extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-           
-         }     
-    }
-    renderComments(dish){
+    function RenderComments({dish}){
         if(dish == null){
             return(
                 <div></div>
@@ -36,7 +29,7 @@ class DishDetail extends Component{
         </div>
         )
     }
-    renderDish(dish){
+    function RenderDish({dish}){
         const selectedDishDetail = dish;
         if(selectedDishDetail != null){
             return(     
@@ -57,19 +50,19 @@ class DishDetail extends Component{
             ) 
         }  
     }
-    render(){
-        console.log('in render of DishDetail')
-        console.log(this.props.dish);
-        const dishItem = this.renderDish(this.props.dish);
-        const commentItem = this.renderComments(this.props.dish);
+    
+    const DishDetail = (props) => {
+        console.log("DishDetail  component render invoked")
+        //const dishItem = this.renderDish(props.dish);
+        //const commentItem = this.renderComments(props.dish);
         return(
         <div className="container">
            <div className="row">
-             {dishItem}
-             {commentItem}
+             <RenderDish dish={props.dish}/>
+             <RenderComments dish={props.dish} />
            </div>
       </div> 
     )
   }
-}
+
 export default DishDetail;
