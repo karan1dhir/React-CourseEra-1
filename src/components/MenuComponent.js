@@ -11,8 +11,7 @@ import {Card,CardImg,CardImgOverlay,CardTitle} from 'reactstrap'
            </CardImgOverlay>
         </Card>
     )
-  } 
-  
+  }  
    const Menu = (props) =>{
     console.log('Menu component render invoked')
     const menu = props.dishes.map((dish)=>{
