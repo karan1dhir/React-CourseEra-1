@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Card,CardImg,CardImgOverlay,CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap'
 
-
   function RenderMenuItem({dish}){
       return(
         <Card>
@@ -24,7 +23,6 @@ import {Card,CardImg,CardImgOverlay,CardTitle,Breadcrumb,BreadcrumbItem} from 'r
               </div>  
         );
     });
-   
     return(
         <div className="container">
         <div className="row">
