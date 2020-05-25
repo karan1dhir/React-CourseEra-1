@@ -14,8 +14,7 @@ function RenderLeader({leader}){
         <p>{leader.designation}</p>
       {leader.description}
       </Media>
-    </Media>
-      
+    </Media>   
    );
 }
 function About(props) {
