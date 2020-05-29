@@ -4,6 +4,8 @@ import {Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem} from
 import { Button,Modal,ModalHeader,ModalBody,Row,Col,Label} from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Loading} from './LoadingComponent';
+import {baseUrl} from '../shared/baseUrl';
+
 
 const required = (val) => val && val.length;
 const maxlength = (len) => (val) => !(val) || (val.length <= len);
@@ -134,7 +136,7 @@ class CommentForm extends Component{
             return(     
                 <div>
                   <Card>
-                    <CardImg top src={selectedDishDetail.image} alt={selectedDishDetail.name} />
+                    <CardImg top src={baseUrl + selectedDishDetail.image} alt={selectedDishDetail.name} />
                         <CardBody>
                             <CardTitle>{selectedDishDetail.name}</CardTitle>
                             <CardText>{selectedDishDetail.description}</CardText>
