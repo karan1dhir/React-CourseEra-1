@@ -28,7 +28,7 @@ class CommentForm extends Component{
     handleSubmit(values){
         this.toggleModal();
         console.log(JSON.stringify(values));
-        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
+        this.props.postComment(this.props.dishId,values.rating,values.author,values.comment);
     }
     render(){
         return(
@@ -59,9 +59,9 @@ class CommentForm extends Component{
                             </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="authorName" md={12}>Your Name</Label>
+                                <Label htmlFor="author" md={12}>Your Name</Label>
                                 <Col md={12}>
-                                    <Control.text model=".authorName" id="authorName" name="authorName"
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         validators={{
                                             required,
@@ -69,7 +69,7 @@ class CommentForm extends Component{
                                             maxlength: maxlength(15),
                                         }}
                                         className="form-control"/> 
-                                        <Errors className="text-danger" model=".authorName" show="touched" messages={{
+                                        <Errors className="text-danger" model=".author" show="touched" messages={{
                                             required : 'Required',
                                             minlength : 'Must be greater than 2 character',
                                             maxlength : 'Must be 15 characters or less',
@@ -100,7 +100,7 @@ class CommentForm extends Component{
         )
     }
 }
-    function RenderComments({comments,addComment,dishId}){
+    function RenderComments({comments,postComment,dishId}){
         if(comments == null){
             return(
                 <div></div>
@@ -126,7 +126,7 @@ class CommentForm extends Component{
             <ul className = "list-unstyled">
               {comts}
             </ul>
-            <CommentForm dishId={dishId} addComment={addComment}/>
+            <CommentForm dishId={dishId} postComment={postComment}/>
         </div>
         )
     }
@@ -191,7 +191,7 @@ class CommentForm extends Component{
                 <RenderDish dish={props.dish} />
             </div>
             <div className="col-12 col-md-5 m-1">
-                <RenderComments comments={props.comments} addComment={props.addComment} dishId={props.dish.id}/>
+                <RenderComments comments={props.comments} postComment={props.postComment} dishId={props.dish.id}/>
                
             </div>
             </div>
