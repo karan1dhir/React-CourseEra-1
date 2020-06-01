@@ -3,6 +3,7 @@ import {Card , CardImg, CardText, CardBody,CardTitle,CardSubtitle } from 'reacts
 import {Loading} from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
 
+
 function RenderCard({item,isLoading,errMsg}){
     
     if(isLoading){
@@ -16,7 +17,7 @@ function RenderCard({item,isLoading,errMsg}){
         )
     }
     else{
-    return(
+    return(   
       <Card>
           <CardImg src={baseUrl + item.image} alt={item.name}/>
               <CardBody>
@@ -26,7 +27,7 @@ function RenderCard({item,isLoading,errMsg}){
                 {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
                 <CardText>{item.description}</CardText>
               </CardBody>
-      </Card>
+      </Card>  
     );
    }
 }
@@ -40,7 +41,10 @@ function Home(props){
                 errMsg={props.dishesErrMess}/>
              </div>
              <div className="col-12 col-md m-1">
-                <RenderCard item={props.leader} />
+                <RenderCard item={props.leader} 
+                    isLoading={props.leadersLoading}
+                    errMsg={props.leadersErrMess}
+                />
              </div>
              <div className="col-12 col-md m-1">
                 <RenderCard item={props.promotion} 

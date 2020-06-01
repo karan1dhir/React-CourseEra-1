@@ -1,13 +1,17 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {baseUrl} from '../shared/baseUrl';
+import {Loading} from './LoadingComponent';
+import { Fade, Stagger } from "react-animation-components";
 
 
+function About(props) {
 function RenderLeader({leader}){
    return(
     <Media className="mt-5">
       <Media left className="mr-5">
-       <Media object src={leader.image} alt={leader.name} />
+       <Media object src={baseUrl+leader.image} alt={leader.name} />
       </Media>
       <Media body>
         <Media heading>{leader.name}</Media>
@@ -17,14 +21,36 @@ function RenderLeader({leader}){
     </Media>   
    );
 }
-function About(props) {
+function RenderContent({leaders,isLoading,errMsg}) {
 
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <RenderLeader key={leader.id} leader={leader}/>
-        );
-    });
-
+    if(isLoading){
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        )
+    }
+    else if (errMsg){
+        return(
+            <div className="container">
+            <div className="row">
+                <h4>{errMsg}</h4>
+            </div>
+        </div>
+        )
+    }
+    else{
+       return(
+        <div>
+        {props.leaders.map(leader => (
+            <RenderLeader key={leader.id} leader={leader} />
+        ))}
+      </div>
+       )
+    }
+}
     return(
         <div className="container">
             <div className="row">
@@ -81,7 +107,11 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                    <RenderContent
+                        leaders={props.leader}
+                        isLoading={props.leaderLoading}
+                        errMess={props.leaderErrMess}
+                    />
                     </Media>
                 </div>
             </div>

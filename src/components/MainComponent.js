@@ -8,9 +8,8 @@ import Home from './HomeComponent';
 import About from './AboutComponent';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {postComment,fetchDishes,fetchComments,fetchPromotions} from '../redux/ActionCreator';
+import {postComment,fetchDishes,fetchComments,fetchPromotions,fetchLeaders} from '../redux/ActionCreator';
 import {actions} from 'react-redux-form';
-
 
 
 
@@ -27,7 +26,8 @@ const mapDispatchToProps = dispatch => ({
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => dispatch(fetchDishes()),
   fetchComments: () => dispatch(fetchComments()),
-  fetchPromotions : () =>dispatch(fetchPromotions()),
+  fetchPromotions : () => dispatch(fetchPromotions()),
+  fetchLeaders : () => dispatch(fetchLeaders()),
   resetFeedbackForm : () => dispatch(actions.reset('feedback'))
 });
 
@@ -37,6 +37,7 @@ class Main extends Component{
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromotions();
+    this.props.fetchLeaders();
   }
 
   render(){
@@ -48,7 +49,9 @@ class Main extends Component{
         promotion={this.props.promotions.promotions.filter((promo)=> promo.featured)[0]}
         promosLoading={this.props.promotions.isLoading}
         promosErrMess={this.props.promotions.errMsg}
-        leader={this.props.leaders.filter((leader)=> leader.featured)[0]}
+        leader={this.props.leaders.leaders.filter((leader)=> leader.featured)[0]}
+        leadersLoading={this.props.leaders.isLoading}
+        leadersErrMess={this.props.leaders.errMsg}
       />
     )
   }
@@ -65,13 +68,16 @@ class Main extends Component{
   } 
   const AboutPage = ()=> {
     return(
-      <About leaders = {this.props.leaders}></About>
+      <About leaders = {this.props.leaders.leaders}
+             leadersLoading={this.props.leaders.isLoading}
+             leadersErrMess={this.props.leaders.errMsg}>
+        </About>
     )
   } 
   return (
     <div className="App">
     <Header/>
-     <Switch >
+     <Switch location={this.props.location}>
           <Route path="/home"  component={HomePage}/>
           <Route exact path="/menu" component={()=> <Menu dishes={this.props.dishes}></Menu>}/>
           <Route path='/menu/:dishId' component={DishWithId} />

@@ -5,6 +5,7 @@ import { Button,Modal,ModalHeader,ModalBody,Row,Col,Label} from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Loading} from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
+//import {FadeTranform,Stagger,Fade} from 'react-animation-components'
 
 
 const required = (val) => val && val.length;
@@ -108,6 +109,7 @@ class CommentForm extends Component{
         }
         const comts = comments.map((com)=>{      
             return(
+              
                 <li key={com.id} > 
                        <p>{com.comment}</p>
                        <p>{com.author},
@@ -118,13 +120,16 @@ class CommentForm extends Component{
                             day: '2-digit'
                         }).format(new Date(com.date))}</p>            
                 </li>
+              
             );  
         })
         return(
             <div>
             <h4>Comments</h4>
             <ul className = "list-unstyled">
+            
               {comts}
+             
             </ul>
             <CommentForm dishId={dishId} postComment={postComment}/>
         </div>
@@ -135,6 +140,7 @@ class CommentForm extends Component{
         if(selectedDishDetail != null){
             return(     
                 <div>
+                   
                   <Card>
                     <CardImg top src={baseUrl + selectedDishDetail.image} alt={selectedDishDetail.name} />
                         <CardBody>
@@ -142,7 +148,9 @@ class CommentForm extends Component{
                             <CardText>{selectedDishDetail.description}</CardText>
                         </CardBody>
                     </Card>
+                  
                 </div>  
+            
             );    
         }
         else{    
